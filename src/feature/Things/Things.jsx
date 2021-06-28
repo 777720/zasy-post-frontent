@@ -5,8 +5,11 @@ export const Things = () => {
     const history = useHistory();
     return (
         <div>
-            thisfs
             <button onClick={() => { history.push('/') }}>返回</button>
+            <h1>
+                todo list
+            </h1>
+            <div className="p-6">123</div>
         </div>
     )
 }
