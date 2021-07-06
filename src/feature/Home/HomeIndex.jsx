@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useHistory } from 'react-router-dom'
+import './styles/index.scss'
 
 
 export const HomeIndex = (props) => {
@@ -9,9 +10,12 @@ export const HomeIndex = (props) => {
         history.push('/add')
     }
     return (
-        <div>
-            this is home
-            <button onClick={onClickAddThing}>新增</button>
+        <div className='pg-home'>
+
+            <div className='bottom-btn'>
+                <div></div>
+                <div></div>
+            </div>
         </div>
     );
 };
