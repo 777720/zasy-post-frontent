@@ -14,7 +14,7 @@ export const HomeIndex = (props) => {
 
             <div className='bottom-btn'>
                 <div>
-                    <img src={require('')}/>
+                    <img src={require('../../assets/images/daojishi.png')} />
                 </div>
                 <div></div>
             </div>

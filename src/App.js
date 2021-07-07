@@ -3,6 +3,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import React from "react";
 import { HomeIndex } from "./feature/Home/HomeIndex"
 import { Things } from "./feature/Things/Things";
 import './App.css';
