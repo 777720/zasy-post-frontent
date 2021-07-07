@@ -13,7 +13,9 @@ export const HomeIndex = (props) => {
         <div className='pg-home'>
 
             <div className='bottom-btn'>
-                <div></div>
+                <div>
+                    <img src={require('')}/>
+                </div>
                 <div></div>
             </div>
         </div>
