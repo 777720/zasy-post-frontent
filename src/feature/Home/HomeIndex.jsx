@@ -11,12 +11,14 @@ export const HomeIndex = (props) => {
     }
     return (
         <div className='pg-home'>
-
             <div className='bottom-btn'>
-                <div>
-                    <img src={require('../../assets/images/daojishi.png')} />
+                <div className="flex-item">
+                    <img className="bottom-btn--img" src={require('../../assets/images/daojishi.png')} />
                 </div>
-                <div></div>
+                <div className="flex-item">
+                    <img className="bottom-btn--img" src={require('../../assets/images/daojishi.png')} />
+                </div>
+
             </div>
         </div>
     );

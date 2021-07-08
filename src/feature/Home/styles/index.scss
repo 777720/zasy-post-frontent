@@ -2,8 +2,20 @@
     background: rgb(207,214,219);
     height: 100%;
 
-    .bottom-btn {
-        height: 200px;
-    }
 
+    .bottom-btn {
+        width: 100%;
+        .flex-item {
+            flex: 1
+        }
+        bottom: 0;
+        height: 120px;
+        position: fixed;
+        display: flex;
+        align-content:center;
+    }
+    .bottom-btn--img {
+        margin: -60px;
+        height: 32px;
+    }
 }

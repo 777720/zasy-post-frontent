@@ -2,14 +2,8 @@ const path = require('path');
 const  webpack  = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-
 const ServiceEnv = require('./ServiceEnv')
-
-
 const serviceEnv  = new ServiceEnv().run(process.env.ZASY_NODE);
-
-
-
 
 module.exports = {
     output: {
