@@ -8,7 +8,22 @@
 
     .card-day-plan {
         background-color: #ffffff;
-        .day-item {
+        height: 100%;
+        position: relative;
+        .day-item-one {
+            position: absolute;
+            left: 10%;
+            top: 10%;
+            background-color: #61dafb;
+            height: 80%;
+            width: 80%
+        }
+
+        .day-item-two {
+
+        }
+
+        .day-item-three {
 
         }
     }

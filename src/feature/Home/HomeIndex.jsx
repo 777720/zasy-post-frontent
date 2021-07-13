@@ -1,6 +1,8 @@
 import  React, { useState } from 'react';
 import { useHistory } from 'react-router-dom'
+import {DayPlanCard} from "./DayPlanCard";
 import './styles/index.scss'
+
 
 
 export const HomeIndex = (props) => {
@@ -18,8 +20,7 @@ export const HomeIndex = (props) => {
     return (
         <div className='pg-home'>
             <div className="home-container">
-
-                123
+                <DayPlanCard />
             </div>
             <div className='bottom-btn'>
                 <div className={ `flex-item${currentTab === 1 ? '--click' : ''}` } onClick={() => { onClickTabFn(1) }}>
