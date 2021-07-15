@@ -12,7 +12,7 @@ module.exports = {
     },
     resolve: {
         alias: {
-            '@': path.resolve(__dirname, '../src'),
+            '@': path.resolve(__dirname, '../src')
         },
         fallback: {
             "fs": false,
@@ -27,7 +27,7 @@ module.exports = {
             "crypto-browserify": require.resolve('crypto-browserify'),
         },
 
-        extensions: ['.js', '.jsx' ],
+        extensions: ['', '.js', '.jsx'],
     },
     entry: {
         index: [

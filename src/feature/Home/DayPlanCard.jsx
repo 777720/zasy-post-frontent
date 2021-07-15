@@ -1,14 +1,13 @@
-import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 import inobounce from "inobounce";
 
-export const DayPlanCard = () => {
+export const DayPlanCard = (props) => {
 
     const dragDiv = useRef()
 
+    const [waitCardList, setWaitCardList] = useState([])
     const [movePosition, setMovePosition] = useState([0, 0]);
-
     const [moveStartPont, setMoveStartPont] = useState([0, 0]);
-    const [hasTransition, setHasTransition] = useState(false);
 
     const handleTouchStartFn = (evt) => {
         if(!evt.touches && evt.touches.length === 0) {
@@ -19,6 +18,14 @@ export const DayPlanCard = () => {
     }
 
     const  handleTouchEndFn = (evt) => {
+        const {clientWidth} = document.body
+        if (Math.abs(movePosition[0]) > clientWidth / 2.5) {
+            removeAllListener(dragDiv);
+            const last = Object.assign({}, waitCardList[waitCardList.length - 1])
+            waitCardList.shift();
+            waitCardList.push(props.dayCard[last.index === props.dayCard.length - 1 ? 0 : last.index + 1])
+            setWaitCardList[waitCardList];
+        }
         setMovePosition([0, 0])
     }
     const  handleTouchMoveFn = (evt) => {
@@ -30,7 +37,6 @@ export const DayPlanCard = () => {
         const moveX = pageX - moveStartPont[0];
 
         if (Math.abs(moveX) > 0) {
-            setHasTransition(true);
             setMovePosition([moveX, 0]);
         }
     }
@@ -53,27 +59,62 @@ export const DayPlanCard = () => {
     }, [movePosition])
 
 
+    useEffect(() => {
+        let temp = []
+        for (let i = 0; i < 3; i ++) {
+            temp.push(props.dayCard[i])
+        }
+        setWaitCardList(temp)
+    }, [])
+
+
+    const removeAllListener = (ref) => {
+        if (!ref.current) {
+            return;
+        }
+        ref.current.removeEventListener('touchstart', handleTouchStartFn);
+        ref.current.removeEventListener('touchmove', handleTouchMoveFn);
+        ref.current.removeEventListener('touchend', handleTouchEndFn);
+    }
+    const addAllListener = (ref) => {
+        if (!ref.current) {
+            return;
+        }
+        ref.current.addEventListener('touchstart', handleTouchStartFn);
+        ref.current.addEventListener('touchmove', handleTouchMoveFn);
+        ref.current.addEventListener('touchend', handleTouchEndFn);
+    }
 
     useEffect(() => {
-        dragDiv.current.addEventListener('touchstart', handleTouchStartFn);
-        dragDiv.current.addEventListener('touchmove', handleTouchMoveFn);
-        dragDiv.current.addEventListener('touchend', handleTouchEndFn)
+        addAllListener(dragDiv)
 
         return () => {
-            dragDiv.current.removeEventListener('touchstart', handleTouchStartFn);
-            dragDiv.current.removeEventListener('touchmove', handleTouchMoveFn);
-            dragDiv.current.removeEventListener('touchend', handleTouchEndFn);
+            removeAllListener(dragDiv)
         }
 
 
-    }, [movePosition])
+    }, [movePosition, waitCardList])
     return (
         <div className="card-day-plan">
-            <div className="day-item-one" ref={dragDiv} style={moveStyle}>
-                { movePosition.join(',') }
-            </div>
-            {/*<div className="day-item-two">2</div>*/}
-            {/*<div className="day-item-three">3</div>*/}
+            {
+                waitCardList.map((item, index) => {
+                    return (
+                        <div
+                            key={index}
+                            className={`day-item-${(index % 3) + 1}`}
+                            ref={index === 0 ?  dragDiv : null}
+                            style={index === 0 ? moveStyle : {}}
+                        >
+
+                            <div>
+                                <img src={ item.imgUrl } style={{ width: '100%' }} />
+                                {item.title}
+                            </div>
+
+                        </div>
+                    )
+                })
+            }
         </div>
     )
 }
